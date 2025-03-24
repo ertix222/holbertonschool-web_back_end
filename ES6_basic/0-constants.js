@@ -13,5 +13,3 @@ export function taskNext() {
 
   return combination;
 }
-var a = "Hello"
-console.log(a)
