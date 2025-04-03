@@ -1,0 +1,1 @@
+README for the promise directory on JS
