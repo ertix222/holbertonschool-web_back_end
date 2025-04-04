@@ -5,10 +5,11 @@ function handleProfileSignup() {
     .then(([photo, user]) => {
       const result = `${photo.body} ${user.firstName} ${user.lastName}`;
       console.log(result);
+      return result
     })
     .catch(() => {
-      const error = 'Signup system offline';
-      console.log(error)
+      console.log('Signup system offline');
+      return 'Signup system offline';
     });
 }
 
