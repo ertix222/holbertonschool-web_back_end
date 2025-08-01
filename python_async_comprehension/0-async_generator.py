@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Async generator module.
+"""Module that defines an asynchronous generator.
 """
 
 import asyncio
