@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """Module to asynchronously collect random numbers using async comprehension.
 """
-import asyncio
+
 import random
+import asyncio
 import typing
 async_generator = __import__('0-async_generator').async_generator
 
