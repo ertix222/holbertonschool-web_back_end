@@ -1,1 +1,0 @@
-this is a README for ES6 Basics
