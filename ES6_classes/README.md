@@ -1,0 +1,1 @@
+This is a README for the classe in ES6 with javascript
