@@ -12,19 +12,25 @@ function countStudents(path) {
     const validLines = lines.slice(1).filter((line) => line.trim() !== '');
     const totalStudents = validLines.length;
 
-    const resultCS = lines.slice(1)
-      .map((line) => line.split(','))
-      .filter((fields) => fields[fieldIndex] === 'CS')
-      .map((fields) => fields[firstnameIndex]);
+    const studentsByField = {};
 
-    const resultSWE = lines.slice(1)
-      .map((line) => line.split(','))
-      .filter((fields) => fields[fieldIndex] === 'SWE')
-      .map((fields) => fields[firstnameIndex]);
+    validLines.forEach((line) => {
+      const fields = line.split(',');
+      const firstname = fields[firstnameIndex];
+      const field = fields[fieldIndex];
 
-    process.stdout.write(`Number of students: ${totalStudents}\n`);
-    process.stdout.write(`Number of students in CS: ${resultCS}\n`);
-    process.stdout.write(`Number of students in SWE: ${resultSWE}\n`);
+      if (!studentsByField[field]) {
+        studentsByField[field] = [];
+      }
+      studentsByField[field].push(firstname);
+    });
+
+    console.log(`Number of students: ${totalStudents}`);
+    for (const [field, names] of Object.entries(studentsByField)) {
+      console.log(
+        `Number of students in ${field}: ${names.length}. List: ${names.join(', ')}`
+      );
+    }
   } catch (err) {
     throw new Error('Cannot load the database');
   }
