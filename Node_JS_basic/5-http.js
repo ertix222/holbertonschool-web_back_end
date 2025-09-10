@@ -52,7 +52,7 @@ app.get('/students', async (req, res) => {
     const output = await countStudents(databasePath);
     res.type('text').send(`This is the list of our students\n${output}`);
   } catch (error) {
-    res.status(500).send('Cannot load the database');
+    res.type('text').send('This is the list of our students\nCannot load the database');
   }
 });
 
