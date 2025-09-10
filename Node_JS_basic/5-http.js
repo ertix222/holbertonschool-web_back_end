@@ -1,8 +1,7 @@
-const express = require('express');
+const http = require('http');
 const fs = require('node:fs/promises');
 const path = require('path');
 
-const app = express();
 const host = 'localhost';
 const port = 1245;
 
@@ -46,13 +45,21 @@ app.get('/', (req, res) => {
   res.send('Hello Holberton School!');
 });
 
-app.get('/students', async (req, res) => {
-  const databasePath = path.join(__dirname, 'database.csv');
-  try {
-    const output = await countStudents(databasePath);
-    res.type('text').send(`This is the list of our students\n${output}`);
-  } catch (error) {
-    res.type('text').send('This is the list of our students\nCannot load the database');
+const app = http.createServer(async (req, res) => {
+  res.setHeader('Content-Type', 'text/plain');
+  if (req.url === '/') {
+    res.end('Hello Holberton School!');
+  } else if (req.url === '/students') {
+    const databasePath = path.join(__dirname, process.argv[2] || ''); // prend l'argument passé
+    try {
+      const output = await countStudents(databasePath);
+      res.end(`This is the list of our students\n${output}`);
+    } catch (error) {
+      res.end('This is the list of our students\nCannot load the database');
+    }
+  } else {
+    res.statusCode = 404;
+    res.end('Not Found');
   }
 });
 
