@@ -41,10 +41,6 @@ async function countStudents(dbPath) {
   }
 }
 
-app.get('/', (req, res) => {
-  res.send('Hello Holberton School!');
-});
-
 const app = http.createServer(async (req, res) => {
   res.setHeader('Content-Type', 'text/plain');
   if (req.url === '/') {
